@@ -11,7 +11,6 @@ const setAndstartServer=async() => {
 
     app.listen(PORT,()=>{
     console.log(`app is listning at ${PORT}`);
-
 });
 
 };
