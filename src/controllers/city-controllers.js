@@ -1,5 +1,6 @@
 const { CityService }=require('../services/index');
 
+
 const cityService=new CityService();
 
 
@@ -113,6 +114,24 @@ const getAll=async(req,res)=>{
         })
     } 
 }
+const addMultipleCities = async (req,res)=>{
+    try {
+    const cities = await cityService.addMultipleCities(req.body.cities);
+    res.status(201).json({
+    success: true,
+    message: 'Cities added successfully',
+    data: cities
+    });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+           data:{},
+           success:false,
+           message:"Somthing went wrong"
+        });
+        
+    }
+}
 
 
 module.exports={
@@ -120,6 +139,7 @@ module.exports={
     destroy,
     update,
     get,
-    getAll
+    getAll,
+    addMultipleCities
 
 }

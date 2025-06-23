@@ -1,4 +1,5 @@
 const{ CityRepository }=require('../repository/index');
+const cityRepository = new CityRepository();
 
 class CityService {
     constructor(){
@@ -47,6 +48,22 @@ class CityService {
         } catch (error) {
           console.log("Somthing went wrong in service layer")  
           throw{error};
+        }
+    }
+    async addMultipleCities(cityList){
+        try {
+          if(!Array.isArray(cityList)||cityList.length===0){
+            throw {
+                message:'Input must be non-empty array',
+                statusCode:400
+            };
+            
+          }  
+          const result= await cityRepository.bulkCreateCities(cityList);
+            return result;
+        } catch (error) {
+           console.log('Somthing went wrong in service layer');
+           throw error;
         }
     }
 }
