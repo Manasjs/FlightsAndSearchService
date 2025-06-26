@@ -17,11 +17,18 @@ class FlightService{
             return flight;
         } catch (error) {
            console.log("somthing went wrong in service layer");
-           throw error; 
+           throw {error}; 
         }
     }
 
-    async getFlightData(){
+    async getAllFlightData(data){
+        try {
+            const flight = await this.flightRepository.getAllFlights(data);
+            return flight;
+        } catch (error) {
+            console.log("somthing went wrong in service layer");
+            throw {error};
+        }
 
     }
 }
